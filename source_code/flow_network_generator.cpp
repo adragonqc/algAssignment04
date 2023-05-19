@@ -129,13 +129,14 @@ Graph GenerateNetwork(string label){
     cout<< "-------------------------------------------------"<< endl;
     
     int sourceEdges = 0;
-    char alreadyBeen = ' ';
+    char alreadyBeenS[2] = {' ', ' '};
+    int visitedCounter= 0;
     
     //Set 2 edges from source
     while (sourceEdges < 2 )
     {
         int edgeNumber = rand() % (vertexNumber-1) +1;
-        int flowValue = rand() % 11;
+        int flowValue = rand() % 10 +1;
 
         //If it's the point is the sink, try again
         if( g.V[edgeNumber].name == end.name)
@@ -143,7 +144,7 @@ Graph GenerateNetwork(string label){
             cout<< g.V[edgeNumber].name << " is the Sink! Trying again!" << endl;
         }
         //If you've already made a connection to this one, try again
-        else if(g.V[edgeNumber].name == alreadyBeen)
+        else if(g.V[edgeNumber].name == alreadyBeenS[0])
         {
             cout<< g.V[edgeNumber].name << " is a repeat! Try again!" << endl;
         }
@@ -152,22 +153,29 @@ Graph GenerateNetwork(string label){
         {
             cout<< "Connect start to: " << g.V[edgeNumber].name << endl;
             Edge startE(start.name, g.V[edgeNumber].name,flowValue, flowValue);
+
+            //update edge values for vertex
+            start.edgesFrom++;
+            g.V[edgeNumber].edgesTo++;
+
+            //Update values so no repeats and add to edge list
             cout<< "Edge " << startE.begin << " to " << startE.end <<  " has flow of " << startE.flow << endl;
-            alreadyBeen = g.V[edgeNumber].name;
+            alreadyBeenS[visitedCounter] = g.V[edgeNumber].name;
+            visitedCounter++;
             g.addEdge(startE);
             sourceEdges++;
         }
     }
 
     cout<< "-------------------------------------------------"<< endl;
-    //Set edges from end to middle
+    //Set edges from middle to end
     int endEdges = 0;
-    char alreadyBeen2[2] = {' ', ' '};
-    int visitedCounter = 0;
+    char alreadyBeenE[3] = {' ', ' ', ' '};
+    int visitedCounter2 = 0;
     while (endEdges < 3 )
     {
         int edgeNumber = rand() % (vertexNumber-1) +1;
-        int flowValue = rand() % 11;
+        int flowValue = rand() % 10 +1;
 
         //If it's the point is the sink, try again
         if( g.V[edgeNumber].name == end.name)
@@ -175,23 +183,111 @@ Graph GenerateNetwork(string label){
             cout<< g.V[edgeNumber].name << " is the Sink! Trying again!" << endl;
         }
         //If you've already made a connection to this one, try again
-        else if((g.V[edgeNumber].name == alreadyBeen2[0])||(g.V[edgeNumber].name == alreadyBeen2[1]))
+        else if((g.V[edgeNumber].name == alreadyBeenE[0])||(g.V[edgeNumber].name == alreadyBeenE[1]))
         {
             cout<< g.V[edgeNumber].name << " is a repeat! Try again!" << endl;
         }
         //If none of the above is correct, make an edge
         else
         {
-            cout<< "Connect start to: " << g.V[edgeNumber].name << endl;
+            cout<< "Connect end to: " << g.V[edgeNumber].name << endl;
             Edge endE( g.V[edgeNumber].name, end.name ,flowValue, flowValue);
+
+            //update edge values for vertex
+            end.edgesTo++;
+            g.V[edgeNumber].edgesFrom++;
+
+            //Update values so no repeats and add to edge list
             cout<< "Edge " << endE.begin << " to " << endE.end <<  " has flow of " << endE.flow << endl;
-            alreadyBeen2[visitedCounter] = g.V[edgeNumber].name;
-            visitedCounter++;
+            alreadyBeenE[visitedCounter2] = g.V[edgeNumber].name;
+            visitedCounter2++;
             g.addEdge(endE);
             endEdges++;
         }
     }
 
+    //Set middle edges
+    cout<< "-------------------------------------------------"<< endl;
+    int midEdges = 0;
+    for (int k = 1; k< vertexNumber-1; k++)
+    {
+        char beenFromMid[3] = {' ', ' ', ' '};
+        char beenToMid[3] = {' ', ' ', ' '};
+        int visitedCounter = 0;
+
+        //Create edges to the middles ones if they don't exist
+        cout<< "-----------------------"<< endl;
+        cout << "Add Edges to Vertex: " << g.V[k].name << endl;
+        while (g.V[k].edgesTo<1)
+        {
+            int edgeNumber = rand() % (vertexNumber-2) +1;
+            int flowValue = rand() % 10 + 1;
+            
+            //If it's the point is the same vertex, try again
+            if( g.V[edgeNumber].name == g.V[k].name)
+            {
+                cout<< g.V[edgeNumber].name << " is the same vertex! Trying again!" << endl;
+            }
+            else
+            {
+                cout<< "Connect " << g.V[edgeNumber].name <<" to: " << g.V[k].name << endl;
+                Edge midE(g.V[edgeNumber].name, g.V[k].name, flowValue, flowValue);
+
+                //Update values so no repeats and add to edge list
+                cout<< "Edge " << midE.begin << " to " << midE.end <<  " has flow of " << midE.flow << endl;
+                g.addEdge(midE);
+
+                //update edge values for vertex
+                midEdges++;
+                g.V[edgeNumber].edgesFrom++;
+                g.V[k].edgesTo++;
+            }
+        }
+
+        //Create edges from the middles ones if they have less than 2
+        while (g.V[k].edgesFrom<2)
+        {
+            int edgeNumber = rand() % (vertexNumber-2) +1;
+            int flowValue = rand() % 10 + 1;
+
+            //If it's the point is the same vertex, try again
+            if( g.V[edgeNumber].name == g.V[k].name)
+            {
+                cout<< g.V[edgeNumber].name << " is the same vertex! Trying again!" << endl;
+            }
+            else if((g.V[edgeNumber].name == beenToMid[0])||(g.V[edgeNumber].name == alreadyBeenE[1]))
+            {
+                cout<< g.V[edgeNumber].name << " is a repeat! Try again!" << endl;
+            }
+            else
+            {
+                cout<< "Connect " << g.V[k].name <<" to: " << g.V[edgeNumber].name << endl;
+                Edge midE(g.V[k].name, g.V[edgeNumber].name, flowValue, flowValue);
+
+                //Update values so no repeats and add to edge list
+                cout<< "Edge " << midE.begin << " to " << midE.end <<  " has flow of " << midE.flow << endl;
+                g.addEdge(midE);
+
+                //update edge values for vertex
+                midEdges++;
+                g.V[edgeNumber].edgesTo++;
+                g.V[k].edgesFrom++;
+            }
+        }
+    }
+    int allEdge = sourceEdges +endEdges +midEdges;
+
+    /*
+    cout<< "-------------------------------------------------"<< endl;
+    for (int j = 0; j< vertexNumber; j++)
+    {
+        cout << "Graph vertex: " << g.V[j].name << endl;
+    }
+    for (int l = 0; l< allEdge; l++)
+    {
+        cout<< "Edge from " << g.E[l].begin << " to " << g.E[l].end<< " and has  a flow of " << g.E[l].flow << endl;
+    }
+    */
 
     return g;
     
