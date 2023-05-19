@@ -1,3 +1,5 @@
+####Zach######
+
 # # Makefile for two programs
 
 # # compiler
@@ -14,7 +16,7 @@
 # clean:
 # 	rm -f main
 
-
+####Ariella##########
 
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall
