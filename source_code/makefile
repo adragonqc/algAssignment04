@@ -35,6 +35,10 @@ $(EXEC): $(OBJS)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-# clean main
 clean:
-	rm -f main
+	rm -f sfml-app # deprecated
+	rm -f *.app
+	rm -f *.o
+	rm -f *.d
+	rm -f -r objects/
+	rm -f -r dependencies/
