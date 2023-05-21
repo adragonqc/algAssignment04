@@ -2,16 +2,55 @@
 #include <queue>
 #include <cstring>
 #include <climits>
+#include <math.h>
 #include "max_flow_generator.h"
 #include "flow_network_generator.h"
 
 using namespace std;
 
+class Path{
+    public:
+        vector<Vertex> vertices;
+        vector<Edge> edges;
+        int maxCapacity;
+        Path()
+        {
+
+        };
+        void addVertex(Vertex v){
+            vertices.push_back(v);
+        };
+        void addEdge(Edge e)
+        {
+            edges.push_back(e);
+        };
+};
+
+
+
+Graph max_flow(Graph a){
+    int edgeSize = a.E.size();
+    int vertexSize = a.V.size();
+    
+
+    vector <Path>paths;
+    vector <char>pastVertex;
+
+    char goal ='Z';
+    char start ='A';
+    char current =start;
+
+
+};
+
+
+
+/* OLD IMPLEMENTATION BELOW
+----------------------------------------------------------
 void MFG::MFG(){
     
 
 }
-
 
 // Returns the maximum flow from s to t in the given graph, V is size of graph
 int MFG::edmonds_karp(int rGraph[][V], int s, int t, int V)
@@ -79,4 +118,4 @@ bool MFG::bfs(int rGraph[][V], int s, int t, int parent[], int V)
     }
 
     return (visited[t] == true);
-}
+}*/

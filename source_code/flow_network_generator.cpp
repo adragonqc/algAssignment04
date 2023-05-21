@@ -31,6 +31,14 @@ class Edge{
     void changeFlow(int f2){
         flow = f2;
     };
+    void changeCapacity(int c2){
+        capacity = c2;
+    };
+    void switchEnd(){
+        char temp = begin;
+        begin = end;
+        end = temp;
+    };
 };
 
 //VERTEX CLASS
