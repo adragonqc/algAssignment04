@@ -47,6 +47,7 @@ int MFG::edmonds_karp(int graph[][V], int s, int t, int V)
     return max_flow;
 }
 
+//returns true if there is a path from source "s" to desitnation "t"
 bool MFG::bfs(int rGraph[][V], int s, int t, int parent[], int V)
 {
     bool visited[V];
