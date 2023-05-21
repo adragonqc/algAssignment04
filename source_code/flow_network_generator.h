@@ -42,7 +42,9 @@ class Graph {
 
     string label;
     bool connectedEnd;
+    int maxFlow;
 
+    Graph();
     Graph(string called);
     void setSource(Vertex addSource);
     void setSink(Vertex addSink);
