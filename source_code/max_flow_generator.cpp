@@ -36,8 +36,9 @@ int MFG::edmonds_karp(int graph[][V], int s, int t, int V)
 
         for (v = t; v != s; v = parent[v]) {
             u = parent[v];
-            rGraph[u][v] -= path_flow;
-            rGraph[v][u] += path_flow;
+            rGraph[u][v] -= path_flow; // Subtract path flow from the forward edge
+            rGraph[v][u] += path_flow; // Add path flow to the backward edge
+        
         }
 
         max_flow += path_flow;
