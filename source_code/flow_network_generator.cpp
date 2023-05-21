@@ -63,6 +63,7 @@ class Graph{
 
     string label;
     bool connectedEnd;
+    int maxFlow;
 
     Graph()
     {
