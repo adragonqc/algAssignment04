@@ -23,6 +23,8 @@ int main () {
   Graph a9 = GenerateNetwork("Graph 01");
   Graph a10 = GenerateNetwork("Graph 01");
 
+  MFG max_flow_grenerator();
+
   Graph totals[10] ={a1,a2,a3,a4,a5,a6,a7,a8,a9,a10};
 
   for(int i = 0; i < 10; i++)
