@@ -75,7 +75,8 @@ int main () {
   }
 
   for(int i=0;i<10;i++){
-    
+    Graph b = total[i];
+    max_flow_grenerator()
   }
 
 

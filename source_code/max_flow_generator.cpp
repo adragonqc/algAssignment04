@@ -3,28 +3,30 @@
 #include <cstring>
 #include <climits>
 #include "max_flow_generator.h"
+#include "flow_network_generator.h"
 
 using namespace std;
 
 void MFG::MFG(){
     
+
 }
 
 
 // Returns the maximum flow from s to t in the given graph, V is size of graph
-int MFG::edmonds_karp(int graph[][V], int s, int t, int V)
+int MFG::edmonds_karp(int rGraph[][V], int s, int t, int V)
 {
     int u, v;
 
     // Create a residual graph and fill the residual graph with
     // given capacities in the original graph as residual capacities
     // in residual graph
-    int rGraph[V][V];
-    for (u = 0; u < V; u++) {
-        for (v = 0; v < V; v++) {
-            rGraph[u][v] = graph[u][v];
-        }
-    }
+    // int rGraph[V][V];
+    // for (u = 0; u < V; u++) {
+    //     for (v = 0; v < V; v++) {
+    //         rGraph[u][v] = graph[u][v];
+    //     }
+    // }
 
     int parent[V];
     int max_flow = 0; // Initialize max flow

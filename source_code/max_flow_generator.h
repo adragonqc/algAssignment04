@@ -1,6 +1,8 @@
 #ifndef MFG_H
 #define MFG_H
 
+#include "flow_network_generator.h"
+
 class MFG {
 public:
     void MFG();
