@@ -11,62 +11,61 @@ using namespace std;
 
 
 int main () {
+  Graph a1 = GenerateNetwork("Graph 01");
+  Graph a2 = GenerateNetwork("Graph 01");
+  Graph a3 = GenerateNetwork("Graph 01");
+  Graph a4 = GenerateNetwork("Graph 01");
+  Graph a5 = GenerateNetwork("Graph 01");
+
+  Graph a6 = GenerateNetwork("Graph 01");
+  Graph a7 = GenerateNetwork("Graph 01");
+  Graph a8 = GenerateNetwork("Graph 01");
+  Graph a9 = GenerateNetwork("Graph 01");
+  Graph a10 = GenerateNetwork("Graph 01");
+
+  Graph totals[10] ={a1,a2,a3,a4,a5,a6,a7,a8,a9,a10};
 
   for(int i = 0; i < 10; i++)
   {
-    cout << "-------------------------------------------------"<< endl;
-    Graph a = GenerateNetwork("Graph " + to_string(i+1));
-    cout << "-------------------------------------------------"<< endl;
-    cout<< "Starting print to file"<< endl;
-    int vertex = a.V.size();
-    int edge = a.E.size();
-    cout<< "-------------------------------------------------"<< endl;
+    Graph b = totals[i];
+    //cout << "-------------------------------------------------"<< endl;
+    //cout<< "Starting print to file"<< endl;
+    //cout << "-------------------------------------------------"<< endl;
 
-    
-    /*for(int i = 0; i < vertex; i++)
-    {
-      cout << "Graph vertex: " << a.V[i].name << endl;
-    }
-    for (int l = 0; l< edge; l++)
-    {
-      cout<< "Edge from " << a.E[l].begin << " to " << a.E[l].end<< " and has a flow of " << a.E[l].flow << endl;
-    }*/
+    int vertex = b.V.size();
+    int edge = b.E.size();
 
     string graphFile = "input_graphs/graph";
     graphFile = graphFile+to_string(i+1);
     graphFile = graphFile+".dot";
 
-    cout<< graphFile<< endl;
+    //cout<< graphFile<< endl;
 
-    string fileText ="diagraph g{\n\nrankdir=LR\n\n";
+    string fileText ="digraph g{\n\nrankdir=LR\n\n";
     string number =to_string(i+1);
-    cout<< fileText<< endl;
+    //cout<< fileText;
  
     for (int l = 0; l< edge; l++)
     {
-      cout << a.E[l].begin<< endl;
-      string begin(1, a.E[l].begin);
-      string end(1, a.E[l].end);
-      string flow = to_string(a.E[l].flow);
+      string begin(1, b.E[l].begin);
+      string end(1, b.E[l].end);
+      string flow = to_string(b.E[l].flow);
 
-      //string begin = a.E[l].begin;
-      //string end = a.E[l].end;
-      //string addLine = a.E[l].begin+" -> "+a.E[l].end+' [label = " '+a.E[l].flow+' "];\n';
-      //cout<< addLine<< endl;
-      //fileText =fileText.append(addLine);
+      string addLine = begin+" -> "+end+"[label =  "+ "\" "+flow+" \"];\n";
+      //cout<< addLine;
+      fileText = fileText+ addLine;
+      
+      
     }
 
-    string endFile ="\nlabel = \"graph\""+number+"\"];\n}";
-    cout<< endFile<< endl;
-
-    //fileText=fileText.append(endFile);
-    //cout<< fileText<< endl;
+    string endFile ="\nlabel = \"graph "+number+"\"\n}";
+    fileText = fileText+ endFile;
+    cout<< fileText<< endl;
     
-
 
     ofstream myfile;  
     myfile.open (graphFile);
-    myfile << "Test message"; 
+    myfile << fileText; 
     myfile.close();
     
   

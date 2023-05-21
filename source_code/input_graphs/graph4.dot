@@ -1,1 +1,15 @@
-Test message
+digraph g{
+
+rankdir=LR
+
+A -> D[label =  " 3 "];
+A -> B[label =  " 1 "];
+B -> Z[label =  " 10 "];
+D -> Z[label =  " 4 "];
+C -> Z[label =  " 1 "];
+B -> C[label =  " 7 "];
+C -> B[label =  " 7 "];
+D -> B[label =  " 5 "];
+
+label = "graph 4"
+}

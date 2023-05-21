@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-
 // Returns the maximum flow from s to t in the given graph
 int MFG::edmonds_karp(int graph[][V], int s, int t, int V)
 {
@@ -47,6 +45,7 @@ int MFG::edmonds_karp(int graph[][V], int s, int t, int V)
     // Return the maximum flow
     return max_flow;
 }
+
 
 //returns true if there is a path from source "s" to desitnation "t"
 bool MFG::bfs(int rGraph[][V], int s, int t, int parent[], int V)

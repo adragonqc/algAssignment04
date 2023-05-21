@@ -43,6 +43,7 @@ class Graph {
     string label;
     bool connectedEnd;
 
+    Graph();
     Graph(string called);
     void setSource(Vertex addSource);
     void setSink(Vertex addSink);
