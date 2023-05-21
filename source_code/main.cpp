@@ -7,6 +7,7 @@
 #include <vector>
 #include <sstream>
 #include "flow_network_generator.h"
+#include "max_flow_generator.h"
 using namespace std;
 
 
@@ -72,5 +73,12 @@ int main () {
     
   
   }
+
+  for(int i=0;i<10;i++){
+    
+  }
+
+
+
   return 0;
 }
