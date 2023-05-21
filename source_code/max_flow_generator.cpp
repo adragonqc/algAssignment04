@@ -6,7 +6,7 @@
 
 using namespace std;
 
-// Returns the maximum flow from s to t in the given graph
+// Returns the maximum flow from s to t in the given graph, V is size of graph
 int MFG::edmonds_karp(int graph[][V], int s, int t, int V)
 {
     int u, v;
