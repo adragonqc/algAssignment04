@@ -3,7 +3,7 @@
 
 class MFG {
 public:
-    Farmer();
+    MFG();
     edmonds_karp(int graph[][V], int s, int t, int V);
     bfs(int rGraph[][V], int s, int t, int parent[], int V));
 
